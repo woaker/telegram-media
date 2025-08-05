@@ -1,1 +1,8 @@
 ids_to_retry: []
+chat:
+- chat_id: telegram
+  ids_to_retry: []
+- chat_id: python
+  ids_to_retry: []
+- chat_id: github
+  ids_to_retry: []

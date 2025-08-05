@@ -4,14 +4,14 @@ session_name: user_session
 # 移除bot_token，使用用户账号
 chat:
 - chat_id: telegram
-  last_read_message_id: 396
-  download_filter: media_type == r'(photo|video|document|audio)'
+  last_read_message_id: 0
+  download_filter: 'true'
 - chat_id: python
-  last_read_message_id: 1325152
-  download_filter: media_type == r'(photo|video|document|audio)'
+  last_read_message_id: 0
+  download_filter: 'true'
 - chat_id: github
   last_read_message_id: 0
-  download_filter: media_type == r'(photo|video|document|audio)'
+  download_filter: 'true'
 file_formats:
   audio:
   - all
@@ -43,4 +43,4 @@ hide_file_name: false
 allowed_user_ids:
 - me
 date_format: '%Y_%m'
-enable_download_txt: false
+enable_download_txt: false 
