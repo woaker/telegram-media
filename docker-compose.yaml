@@ -1,29 +1,58 @@
-version: "3.3"
+version: '3.8'
 
 services:
-  telegram_media_downloader:
-    image: tangyoha/telegram_media_downloader:latest
+  telegram-downloader:
     build: .
-    ports:
-      # Here is what you need to edit
-      - "5000:5000"
-    #environment:
-    #  - http_proxy=http://192.168.101.30:10811
-    #  - https_proxy=http://192.168.101.30:10811
+    container_name: telegram-media-downloader
+    restart: unless-stopped
     volumes:
-      # Here is what you need to edit
-      - "./downloads/:/app/downloads/"
+      # 配置文件
+      - ./config.yaml:/app/config.yaml:ro
+      # 下载目录
+      - ./downloads:/app/downloads
+      # 会话文件
+      - ./sessions:/app/sessions
+      # 日志目录
+      - ./log:/app/log
+    environment:
+      - PYTHONUNBUFFERED=1
+      - TZ=Asia/Shanghai
+    ports:
+      # Web界面端口
+      - "8082:8082"
+    networks:
+      - telegram-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
-      # Rclone
-      - "$HOME/.config/rclone/:$HOME/.config/rclone/"
+  # 可选：Web界面服务（如果需要单独的Web服务）
+  web-ui:
+    build: .
+    container_name: telegram-web-ui
+    restart: unless-stopped
+    command: python simple_web.py
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+      - ./log:/app/log
+    ports:
+      - "8080:8080"
+    networks:
+      - telegram-network
+    depends_on:
+      - telegram-downloader
 
-      # The following is what you don't need to edit
-      - "./config.yaml:/app/config.yaml"
-      - "./data.yaml:/app/data.yaml"
-      - "./log/:/app/log/"
-      - "./sessions/:/app/sessions"
-      - "./temp/:/app/temp"
-    #restart: "unless-stopped"
-# volumes:
-#   sessions:
-#   temp:
+networks:
+  telegram-network:
+    driver: bridge
+
+volumes:
+  downloads:
+    driver: local
+  sessions:
+    driver: local
+  logs:
+    driver: local

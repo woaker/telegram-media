@@ -3,15 +3,15 @@ api_id: 26645966
 session_name: user_session
 # 移除bot_token，使用用户账号
 chat:
-- chat_id: telegram
-  last_read_message_id: 396
-  download_filter: media_type == r'(photo|video|document|audio)'
-- chat_id: python
-  last_read_message_id: 1325152
-  download_filter: media_type == r'(photo|video|document|audio)'
-- chat_id: github
-  last_read_message_id: 0
-  download_filter: media_type == r'(photo|video|document|audio)'
+- chat_id: dyjs01
+  last_read_message_id: 1
+  download_filter: media_type == r'(video)'
+# - chat_id: python
+#   last_read_message_id: 1358893
+#   download_filter: media_type == r'(photo|video|document|audio)'
+# - chat_id: github
+#   last_read_message_id: 0
+#   download_filter: media_type == r'(photo|video|document|audio)'
 file_formats:
   audio:
   - all
