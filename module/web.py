@@ -841,3 +841,163 @@ def get_mp4_files_by_subpath(subpath):
             "error": str(e),
             "message": "获取MP4文件列表失败"
         }), 500
+
+
+@_flask_app.route("/api/video/paths", methods=["GET"])
+def get_video_paths():
+    """
+    根据输入路径返回MP4视频文件路径（独立开放接口，无需登录）
+    
+    Query参数:
+    - path: 文件路径 (必填，可以是绝对路径或相对路径)
+    - recursive: 是否递归搜索子目录 (可选，默认false)
+    - limit: 返回数量限制 (可选，默认100)
+    - offset: 偏移量 (可选，默认0)
+    - sort_by: 排序方式 (可选，name/size/date，默认name)
+    - sort_order: 排序顺序 (可选，asc/desc，默认asc)
+    
+    Returns:
+        JSON格式的MP4文件路径列表
+    """
+    try:
+        # 获取查询参数
+        file_path = request.args.get("path")
+        recursive = request.args.get("recursive", "false").lower() == "true"
+        limit = int(request.args.get("limit", 100))
+        offset = int(request.args.get("offset", 0))
+        sort_by = request.args.get("sort_by", "name")
+        sort_order = request.args.get("sort_order", "asc")
+        
+        # 验证必填参数
+        if not file_path:
+            return jsonify({
+                "success": False,
+                "error": "缺少必填参数: path",
+                "message": "请提供文件路径参数"
+            }), 400
+        
+        # 检查路径是否存在
+        if not os.path.exists(file_path):
+            return jsonify({
+                "success": False,
+                "error": f"路径不存在: {file_path}",
+                "message": "提供的文件路径不存在"
+            }), 404
+        
+        # 检查路径是否为目录
+        if not os.path.isdir(file_path):
+            return jsonify({
+                "success": False,
+                "error": f"路径不是目录: {file_path}",
+                "message": "提供的路径必须是目录"
+            }), 400
+        
+        # 搜索MP4文件
+        mp4_files = []
+        
+        if recursive:
+            # 递归搜索
+            for root, dirs, files in os.walk(file_path):
+                for file in files:
+                    if file.lower().endswith('.mp4'):
+                        file_path_full = os.path.join(root, file)
+                        try:
+                            file_stat = os.stat(file_path_full)
+                            mp4_files.append({
+                                "filename": file,
+                                "file_path": file_path_full.replace("\\", "/"),
+                                "relative_path": os.path.relpath(file_path_full, file_path).replace("\\", "/"),
+                                "file_size": file_stat.st_size,
+                                "file_size_formatted": format_byte(file_stat.st_size),
+                                "modified_time": file_stat.st_mtime,
+                                "modified_time_formatted": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(file_stat.st_mtime)),
+                                "directory": root.replace("\\", "/")
+                            })
+                        except (OSError, IOError) as e:
+                            log.warning(f"无法获取文件信息 {file_path_full}: {e}")
+                            continue
+        else:
+            # 仅搜索当前目录
+            try:
+                for file in os.listdir(file_path):
+                    if file.lower().endswith('.mp4'):
+                        file_path_full = os.path.join(file_path, file)
+                        try:
+                            file_stat = os.stat(file_path_full)
+                            mp4_files.append({
+                                "filename": file,
+                                "file_path": file_path_full.replace("\\", "/"),
+                                "relative_path": file,
+                                "file_size": file_stat.st_size,
+                                "file_size_formatted": format_byte(file_stat.st_size),
+                                "modified_time": file_stat.st_mtime,
+                                "modified_time_formatted": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(file_stat.st_mtime)),
+                                "directory": file_path.replace("\\", "/")
+                            })
+                        except (OSError, IOError) as e:
+                            log.warning(f"无法获取文件信息 {file_path_full}: {e}")
+                            continue
+            except (OSError, IOError) as e:
+                return jsonify({
+                    "success": False,
+                    "error": f"无法读取目录: {str(e)}",
+                    "message": "无法读取指定目录"
+                }), 500
+        
+        # 排序文件
+        if sort_by == "size":
+            mp4_files.sort(key=lambda x: x["file_size"], reverse=(sort_order == "desc"))
+        elif sort_by == "date":
+            mp4_files.sort(key=lambda x: x["modified_time"], reverse=(sort_order == "desc"))
+        else:  # 默认按名称排序
+            mp4_files.sort(key=lambda x: x["filename"].lower(), reverse=(sort_order == "desc"))
+        
+        # 应用分页
+        total_count = len(mp4_files)
+        mp4_files = mp4_files[offset:offset + limit]
+        
+        # 计算目录统计信息
+        total_size = sum(f["file_size"] for f in mp4_files)
+        avg_size = total_size / len(mp4_files) if mp4_files else 0
+        
+        # 返回结果
+        return jsonify({
+            "success": True,
+            "data": {
+                "search_path": file_path.replace("\\", "/"),
+                "search_options": {
+                    "recursive": recursive,
+                    "sort_by": sort_by,
+                    "sort_order": sort_order
+                },
+                "files": mp4_files,
+                "pagination": {
+                    "total": total_count,
+                    "limit": limit,
+                    "offset": offset,
+                    "has_more": offset + limit < total_count
+                },
+                "statistics": {
+                    "total_files": total_count,
+                    "total_size": total_size,
+                    "total_size_formatted": format_byte(total_size),
+                    "average_size": round(avg_size, 2),
+                    "average_size_formatted": format_byte(int(avg_size))
+                }
+            },
+            "message": f"成功找到 {total_count} 个MP4文件"
+        })
+        
+    except ValueError as e:
+        return jsonify({
+            "success": False,
+            "error": f"参数错误: {str(e)}",
+            "message": "参数格式不正确"
+        }), 400
+    except Exception as e:
+        log.error(f"获取MP4文件列表失败: {str(e)}")
+        return jsonify({
+            "success": False,
+            "error": str(e),
+            "message": "获取MP4文件列表失败"
+        }), 500
