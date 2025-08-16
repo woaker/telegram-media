@@ -10,7 +10,7 @@ import time
 from urllib.parse import urlencode
 
 # 配置
-BASE_URL = "http://127.0.0.1:8082"
+BASE_URL = "http://127.0.0.1:5503"
 LOGIN_URL = f"{BASE_URL}/login"
 API_BASE = f"{BASE_URL}/api"
 
