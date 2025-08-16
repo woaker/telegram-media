@@ -1,0 +1,82 @@
+# Telegram Media Downloader 代理配置示例
+# 复制此文件为 config.yaml 并根据您的代理设置进行修改
+
+api_hash: YOUR_API_HASH
+api_id: YOUR_API_ID
+session_name: user_session
+
+# 代理配置示例
+# 根据您的网络环境选择合适的代理配置
+
+# 示例1: HTTP代理 (常见于公司网络或某些VPN)
+proxy:
+  scheme: "http"
+  hostname: "127.0.0.1"
+  port: 7890
+  username: ""  # 如果需要认证
+  password: ""  # 如果需要认证
+
+# 示例2: SOCKS5代理 (常见于Shadowsocks、V2Ray等)
+# proxy:
+#   scheme: "socks5"
+#   hostname: "127.0.0.1"
+#   port: 1080
+#   username: ""  # 如果需要认证
+#   password: ""  # 如果需要认证
+
+# 示例3: 带认证的HTTP代理
+# proxy:
+#   scheme: "http"
+#   hostname: "proxy.company.com"
+#   port: 8080
+#   username: "your_username"
+#   password: "your_password"
+
+# 示例4: 不使用代理 (直接连接)
+# 注释掉整个proxy部分即可
+
+chat:
+- chat_id: dyjs01
+  last_read_message_id: 1
+  download_filter: media_type == r'(photo|video|document|audio)'
+
+file_formats:
+  audio:
+  - all
+  document:
+  - all
+  video:
+  - all
+
+file_path_prefix:
+- chat_title
+- media_datetime
+
+media_types:
+- audio
+- photo
+- video
+- document
+- voice
+- video_note
+
+save_path: /Users/yongjun.xiao/Downloads/telegram_downloads
+web_host: 127.0.0.1
+web_port: 8082
+language: ZH
+web_login_secret: 123456
+max_download_task: 5
+file_name_prefix:
+- message_id
+- file_name
+file_name_prefix_split: ' - '
+hide_file_name: false
+allowed_user_ids:
+- me
+date_format: '%Y_%m'
+enable_download_txt: false
+
+# 其他可选配置
+# start_timeout: 30  # 启动超时时间(秒)
+# log_level: "INFO"  # 日志级别
+# debug_web: false   # 是否启用Web调试模式 
