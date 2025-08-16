@@ -4,12 +4,12 @@ session_name: user_session
 # 移除bot_token，使用用户账号
 
 # 代理配置 - 使用本地HTTP代理服务
-proxy:
-  scheme: http
-  hostname: 127.0.0.1
-  port: 7890
-  username: ''
-  password: ''
+# proxy:
+#   scheme: http
+#   hostname: 127.0.0.1
+#   port: 7890
+#   username: ''
+#   password: ''
 
 chat:
 - chat_id: dyjs01
