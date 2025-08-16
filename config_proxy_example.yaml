@@ -49,7 +49,7 @@ file_formats:
   - all
 
 file_path_prefix:
-- chat_title
+- chat_id
 - media_datetime
 
 media_types:
@@ -60,7 +60,7 @@ media_types:
 - voice
 - video_note
 
-save_path: /Users/yongjun.xiao/Downloads/telegram_downloads
+save_path: /home/ec2-user/media
 web_host: 127.0.0.1
 web_port: 8082
 language: ZH

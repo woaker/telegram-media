@@ -190,9 +190,7 @@ async def _get_media_meta(
 
     file_name = None
     temp_file_name = None
-    dirname = validate_title(f"{chat_id}")
-    if message.chat and message.chat.title:
-        dirname = validate_title(f"{message.chat.title}")
+    dirname = str(chat_id)
 
     if message.date:
         datetime_dir_name = message.date.strftime(app.date_format)
@@ -272,9 +270,7 @@ async def save_msg_to_file(
     app, chat_id: Union[int, str], message: pyrogram.types.Message
 ):
     """Write message text into file"""
-    dirname = validate_title(
-        message.chat.title if message.chat and message.chat.title else str(chat_id)
-    )
+    dirname = str(chat_id)
     datetime_dir_name = message.date.strftime(app.date_format) if message.date else "0"
 
     file_save_path = app.get_file_save_path("msg", dirname, datetime_dir_name)

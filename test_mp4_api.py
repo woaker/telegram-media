@@ -23,7 +23,7 @@ def test_mp4_search_by_path():
         print("-" * 50)
         
         # 使用配置文件中的下载路径
-        search_path = "/Users/yongjun.xiao/Downloads/telegram_downloads"
+        search_path = "/home/ec2-user/media"
         params = {"path": search_path, "limit": 10}
         
         response = requests.get(f"{API_BASE}/files/mp4?{urlencode(params)}")
@@ -216,7 +216,7 @@ def test_specific_queries():
     print("=" * 70)
     
     try:
-        search_path = "/Users/yongjun.xiao/Downloads/telegram_downloads"
+        search_path = "/home/ec2-user/media"
         
         # 测试场景1: 获取最大的MP4文件
         print("\n1. 获取最大的MP4文件:")

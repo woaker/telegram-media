@@ -32,16 +32,16 @@
 
 ```bash
 # 搜索指定路径下的MP4文件
-curl "http://127.0.0.1:5503/api/files/mp4?path=/Users/yongjun.xiao/Downloads/telegram_downloads"
+curl "http://127.0.0.1:5503/api/files/mp4?path=/home/ec2-user/media"
 
 # 递归搜索子目录
-curl "http://127.0.0.1:5503/api/files/mp4?path=/Users/yongjun.xiao/Downloads/telegram_downloads&recursive=true"
+curl "http://127.0.0.1:5503/api/files/mp4?path=/home/ec2-user/media&recursive=true"
 
 # 按文件大小排序，获取最大的3个文件
-curl "http://127.0.0.1:5503/api/files/mp4?path=/Users/yongjun.xiao/Downloads/telegram_downloads&recursive=true&sort_by=size&sort_order=desc&limit=3"
+curl "http://127.0.0.1:5503/api/files/mp4?path=/home/ec2-user/media&recursive=true&sort_by=size&sort_order=desc&limit=3"
 
 # 分页获取文件
-curl "http://127.0.0.1:5503/api/files/mp4?path=/Users/yongjun.xiao/Downloads/telegram_downloads&recursive=true&limit=5&offset=10"
+curl "http://127.0.0.1:5503/api/files/mp4?path=/home/ec2-user/media&recursive=true&limit=5&offset=10"
 ```
 
 ### 2. 根据子路径搜索MP4文件
@@ -167,29 +167,29 @@ curl "http://127.0.0.1:5503/api/files/mp4/电影探长%20电影解说新片推�
 ### 1. 获取指定目录下的所有MP4文件
 
 ```bash
-curl "http://127.0.0.1:5503/api/files/mp4?path=/path/to/videos&recursive=true"
+curl "http://127.0.0.1:5503/api/files/mp4?path=/home/ec2-user/media&recursive=true"
 ```
 
 ### 2. 获取最大的MP4文件
 
 ```bash
-curl "http://127.0.0.1:5503/api/files/mp4?path=/path/to/videos&recursive=true&sort_by=size&sort_order=desc&limit=1"
+curl "http://127.0.0.1:5503/api/files/mp4?path=/home/ec2-user/media&recursive=true&sort_by=size&sort_order=desc&limit=1"
 ```
 
 ### 3. 获取最新的MP4文件
 
 ```bash
-curl "http://127.0.0.1:5503/api/files/mp4?path=/path/to/videos&recursive=true&sort_by=date&sort_order=desc&limit=1"
+curl "http://127.0.0.1:5503/api/files/mp4?path=/home/ec2-user/media&recursive=true&sort_by=date&sort_order=desc&limit=1"
 ```
 
 ### 4. 分页浏览大量MP4文件
 
 ```bash
 # 第1页
-curl "http://127.0.0.1:5503/api/files/mp4?path=/path/to/videos&recursive=true&limit=10&offset=0"
+curl "http://127.0.0.1:5503/api/files/mp4?path=/home/ec2-user/media&recursive=true&limit=10&offset=0"
 
 # 第2页
-curl "http://127.0.0.1:5503/api/files/mp4?path=/path/to/videos&recursive=true&limit=10&offset=10"
+curl "http://127.0.0.1:5503/api/files/mp4?path=/home/ec2-user/media&recursive=true&limit=10&offset=10"
 ```
 
 ### 5. 搜索特定子目录
@@ -230,7 +230,7 @@ curl "http://127.0.0.1:5503/api/files/mp4/子目录名称?recursive=true"
 python3 test_mp4_api.py
 
 # 测试特定查询
-curl "http://127.0.0.1:5503/api/files/mp4?path=/Users/yongjun.xiao/Downloads/telegram_downloads&recursive=true&limit=5"
+curl "http://127.0.0.1:5503/api/files/mp4?path=/home/ec2-user/media&recursive=true&limit=5"
 ```
 
 ## 更新日志

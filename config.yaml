@@ -29,7 +29,7 @@ file_formats:
   video:
   - all
 file_path_prefix:
-- chat_title
+- chat_id
 - media_datetime
 media_types:
 - audio
