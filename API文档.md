@@ -6,7 +6,7 @@
 
 ## 基础信息
 
-- **基础URL**: `http://127.0.0.1:5503`
+- **基础URL**: `http://127.0.0.1:5504`
 - **认证方式**: 部分接口需要认证，部分接口为公开接口
 - **数据格式**: JSON
 - **字符编码**: UTF-8
@@ -50,7 +50,7 @@
 
 **使用示例:**
 ```bash
-curl -X POST http://127.0.0.1:5503/login \
+curl -X POST http://127.0.0.1:5504/login \
   -d "password=123456" \
   -c cookies.txt
 ```
@@ -109,13 +109,13 @@ curl -X POST http://127.0.0.1:5503/login \
 **使用示例:**
 ```bash
 # 获取所有文件（无需登录）
-curl "http://127.0.0.1:5503/api/download_paths"
+curl "http://127.0.0.1:5504/api/download_paths"
 
 # 获取已完成的MP4文件（无需登录）
-curl "http://127.0.0.1:5503/api/download_paths?status=completed&file_type=.mp4"
+curl "http://127.0.0.1:5504/api/download_paths?status=completed&file_type=.mp4"
 
 # 分页获取文件（无需登录）
-curl "http://127.0.0.1:5503/api/download_paths?limit=10&offset=20"
+curl "http://127.0.0.1:5504/api/download_paths?limit=10&offset=20"
 ```
 
 ### 2. 获取特定聊天的下载文件路径
@@ -171,10 +171,10 @@ curl "http://127.0.0.1:5503/api/download_paths?limit=10&offset=20"
 **使用示例:**
 ```bash
 # 获取特定聊天的所有文件（无需登录）
-curl "http://127.0.0.1:5503/api/download_paths/chat123"
+curl "http://127.0.0.1:5504/api/download_paths/chat123"
 
 # 获取特定聊天的MP4文件（无需登录）
-curl "http://127.0.0.1:5503/api/download_paths/chat123?file_type=.mp4"
+curl "http://127.0.0.1:5504/api/download_paths/chat123?file_type=.mp4"
 ```
 
 ### 3. 获取下载文件路径统计信息
@@ -227,7 +227,7 @@ curl "http://127.0.0.1:5503/api/download_paths/chat123?file_type=.mp4"
 **使用示例:**
 ```bash
 # 获取统计信息（无需登录）
-curl "http://127.0.0.1:5503/api/download_paths/stats"
+curl "http://127.0.0.1:5504/api/download_paths/stats"
 ```
 
 ## 数据字段说明
@@ -293,24 +293,24 @@ curl "http://127.0.0.1:5503/api/download_paths/stats"
 import requests
 
 # 公开接口 - 无需登录
-response = requests.get("http://127.0.0.1:5503/api/download_paths")
+response = requests.get("http://127.0.0.1:5504/api/download_paths")
 files = response.json()["data"]["files"]
 
 # 获取已完成的MP4文件
 params = {"status": "completed", "file_type": ".mp4"}
-response = requests.get("http://127.0.0.1:5503/api/download_paths", params=params)
+response = requests.get("http://127.0.0.1:5504/api/download_paths", params=params)
 
 # 获取统计信息
-response = requests.get("http://127.0.0.1:5503/api/download_paths/stats")
+response = requests.get("http://127.0.0.1:5504/api/download_paths/stats")
 stats = response.json()["data"]
 
 # 需要认证的接口
 session = requests.Session()
 login_data = {"password": "123456"}
-session.post("http://127.0.0.1:5503/login", data=login_data)
+session.post("http://127.0.0.1:5504/login", data=login_data)
 
 # 现在可以调用需要认证的接口
-response = session.get("http://127.0.0.1:5503/get_download_status")
+response = session.get("http://127.0.0.1:5504/get_download_status")
 ```
 
 ### JavaScript示例
@@ -352,22 +352,22 @@ async function login() {
 # 公开接口 - 无需登录
 
 # 获取所有下载文件
-curl "http://127.0.0.1:5503/api/download_paths"
+curl "http://127.0.0.1:5504/api/download_paths"
 
 # 获取已完成的MP4文件
-curl "http://127.0.0.1:5503/api/download_paths?status=completed&file_type=.mp4"
+curl "http://127.0.0.1:5504/api/download_paths?status=completed&file_type=.mp4"
 
 # 获取特定聊天的文件
-curl "http://127.0.0.1:5503/api/download_paths/chat123"
+curl "http://127.0.0.1:5504/api/download_paths/chat123"
 
 # 获取统计信息
-curl "http://127.0.0.1:5503/api/download_paths/stats"
+curl "http://127.0.0.1:5504/api/download_paths/stats"
 
 # 需要认证的接口
-curl -c cookies.txt -X POST http://127.0.0.1:5503/login \
+curl -c cookies.txt -X POST http://127.0.0.1:5504/login \
   -d "password=123456"
 
-curl -b cookies.txt http://127.0.0.1:5503/get_download_status
+curl -b cookies.txt http://127.0.0.1:5504/get_download_status
 ```
 
 ## 注意事项

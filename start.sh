@@ -106,7 +106,7 @@ start_service() {
         log_info "服务启动成功 (PID: $pid)"
         log_info "日志文件: $LOG_FILE"
         log_info "错误日志: $ERROR_LOG"
-        log_info "Web界面: http://127.0.0.1:5503"
+        log_info "Web界面: http://127.0.0.1:5504"
         return 0
     else
         log_error "服务启动失败"
@@ -163,7 +163,7 @@ status_service() {
         echo "PID: $pid"
         echo "日志文件: $LOG_FILE"
         echo "错误日志: $ERROR_LOG"
-        echo "Web界面: http://127.0.0.1:5503"
+        echo "Web界面: http://127.0.0.1:5504"
         
         # 显示进程信息
         if command -v ps &> /dev/null; then

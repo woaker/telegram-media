@@ -115,7 +115,7 @@ if %errorlevel% equ 0 (
     call :log_info "服务启动成功 (PID: !PID!)"
     call :log_info "日志文件: %LOG_FILE%"
     call :log_info "错误日志: %ERROR_LOG%"
-    call :log_info "Web界面: http://127.0.0.1:5503"
+    call :log_info "Web界面: http://127.0.0.1:5504"
     exit /b 0
 ) else (
     call :log_error "服务启动失败"
@@ -162,7 +162,7 @@ if %errorlevel% equ 0 (
     echo PID: !PID!
     echo 日志文件: %LOG_FILE%
     echo 错误日志: %ERROR_LOG%
-    echo Web界面: http://127.0.0.1:5503
+    echo Web界面: http://127.0.0.1:5504
     
     echo.
     echo 进程信息:

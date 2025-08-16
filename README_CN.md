@@ -185,7 +185,7 @@ file_name_prefix:
 file_name_prefix_split: ' - '
 max_download_task: 5
 web_host: 127.0.0.1
-web_port: 5503
+web_port: 5504
 web_login_secret: 123456
 allowed_user_ids:
 - 'me'

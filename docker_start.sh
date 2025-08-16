@@ -95,7 +95,7 @@ start_service() {
     
     if is_running; then
         log_info "Docker 服务启动成功"
-        log_info "Web界面: http://localhost:5503"
+        log_info "Web界面: http://localhost:5504"
         log_info "查看日志: $0 logs"
         return 0
     else
@@ -136,7 +136,7 @@ status_service() {
         cd "$SCRIPT_DIR"
         docker-compose -f "$COMPOSE_FILE" ps
         echo ""
-        echo "Web界面: http://localhost:5503"
+        echo "Web界面: http://localhost:5504"
         echo "查看日志: $0 logs"
     else
         echo -e "${RED}✗ Docker 服务未运行${NC}"

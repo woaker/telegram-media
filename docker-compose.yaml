@@ -19,11 +19,11 @@ services:
       - TZ=Asia/Shanghai
     ports:
       # Web界面端口
-      - "8082:5503"
+      - "8082:5504"
     networks:
       - telegram-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5503"]
+      test: ["CMD", "curl", "-f", "http://localhost:5504"]
       interval: 30s
       timeout: 10s
       retries: 3
