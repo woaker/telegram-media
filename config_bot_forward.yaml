@@ -25,8 +25,8 @@ media_types:
 - voice
 - video_note
 save_path: /home/ec2-user/media
-web_host: 127.0.0.1
-web_port: 8082
+web_host: 0.0.0.0
+web_port: 5503
 language: ZH
 web_login_secret: 123456
 max_download_task: 5
