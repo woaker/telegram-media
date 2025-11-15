@@ -23,7 +23,7 @@ def test_video_paths_api():
         print("-" * 50)
         
         # 使用一个可能存在的路径
-        search_path = "/home/ec2-user/media"
+        search_path = "/Users/yongjun.xiao/Downloads/telegram_downloads"
         params = {"path": search_path, "limit": 5}
         
         response = requests.get(f"{API_BASE}/video/paths?{urlencode(params)}")
@@ -184,7 +184,7 @@ def test_specific_scenarios():
         print("\n1. 获取最大的MP4文件:")
         print("-" * 40)
         
-        search_path = "/home/ec2-user/media"
+        search_path = "/Users/yongjun.xiao/Downloads/telegram_downloads"    
         params = {"path": search_path, "recursive": "true", "sort_by": "size", "sort_order": "desc", "limit": 1}
         response = requests.get(f"{API_BASE}/video/paths?{urlencode(params)}")
         

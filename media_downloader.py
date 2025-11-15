@@ -599,7 +599,11 @@ async def download_chat_task(
 async def download_all_chat(client: pyrogram.Client):
     """Download All chat"""
     for key, value in app.chat_download_config.items():
-        value.node = TaskNode(chat_id=key)
+        value.node = TaskNode(
+            chat_id=key,
+            start_offset_id=value.start_offset_id,
+            end_offset_id=value.end_offset_id
+        )
         try:
             await download_chat_task(client, value, value.node)
         except Exception as e:

@@ -10,7 +10,7 @@ async def find_chat_ids():
     try:
         logger.info("创建机器人客户端...")
         client = pyrogram.Client(
-            "media_downloader",
+            "find_chat_ids",  # 使用不同的session名称避免冲突
             api_id=26645966,
             api_hash="4da03a108492e1d45d18f21eded76cfc",
             bot_token="7768865131:AAHArbvzadeXr4yP8voqiO-IFYe83gif0bA",

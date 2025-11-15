@@ -711,7 +711,7 @@ def get_mp4_files_by_subpath(subpath):
         
         # 构建完整路径
         # 这里可以根据需要配置基础路径，或者使用相对路径
-        base_path = "/home/ec2-user/media"  # 可以根据配置文件动态获取
+        base_path = "/Users/yongjun.xiao/Downloads/telegram_downloads"  # 可以根据配置文件动态获取
         full_path = os.path.join(base_path, subpath)
         
         # 检查路径是否存在

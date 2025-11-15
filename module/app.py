@@ -301,6 +301,8 @@ class ChatDownloadConfig:
         self.download_filter: str = None
         self.ids_to_retry: list = []
         self.last_read_message_id = 0
+        self.start_offset_id: int = 0  # 消息ID区间起始值
+        self.end_offset_id: int = 0  # 消息ID区间结束值
         self.total_task: int = 0
         self.finish_task: int = 0
         self.need_check: bool = False
@@ -567,6 +569,12 @@ class Application:
                     self.chat_download_config[
                         item["chat_id"]
                     ].last_read_message_id = item.get("last_read_message_id", 0)
+                    self.chat_download_config[
+                        item["chat_id"]
+                    ].start_offset_id = item.get("start_offset_id", 0)
+                    self.chat_download_config[
+                        item["chat_id"]
+                    ].end_offset_id = item.get("end_offset_id", 0)
                     self.chat_download_config[
                         item["chat_id"]
                     ].download_filter = item.get("download_filter", "")

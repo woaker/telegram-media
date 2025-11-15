@@ -13,14 +13,19 @@ session_name: user_session
 
 chat:
 - chat_id: dyjs01
-  last_read_message_id: 33
-  download_filter: media_type == r'(photo|video|document|audio)'
+  last_read_message_id: 221  # 从消息ID 100开始扫描
+  start_offset_id: 200       # 只下载ID >= 100的消息
+  end_offset_id: 220         # 只下载ID <= 300的消息
+  download_filter: media_type == r'(video)'
 # - chat_id: python
 #   last_read_message_id: 1358893
 #   download_filter: media_type == r'(photo|video|document|audio)'
 # - chat_id: github
 #   last_read_message_id: 0
 #   download_filter: media_type == r'(photo|video|document|audio)'
+# - chat_id: me
+#   last_read_message_id: 0
+#   download_filter: media_type == r'(video)'  
 file_formats:
   audio:
   - all
@@ -38,12 +43,12 @@ media_types:
 - document
 - voice
 - video_note
-save_path: /home/ec2-user/media
+save_path: /Users/yongjun.xiao/Downloads/telegram_downloads
 web_host: 0.0.0.0
 web_port: 5504
 language: ZH
 web_login_secret: 123456
-max_download_task: 0  # 最大下载任务数通常5, 0: 禁用下载
+max_download_task: 5  # 最大下载任务数通常5, 0: 禁用下载
 file_name_prefix:
 - message_id
 - file_name
