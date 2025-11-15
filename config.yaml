@@ -13,7 +13,7 @@ session_name: user_session
 
 chat:
 - chat_id: dyjs01
-  last_read_message_id: 221  # 从消息ID 100开始扫描
+  last_read_message_id: 223  # 从消息ID 100开始扫描, 会根据历史下载情况自动更新
   start_offset_id: 221       # 只下载ID >= 100的消息
   end_offset_id: 222         # 只下载ID <= 300的消息
   download_filter: media_type == r'(video)'
