@@ -1,7 +1,7 @@
 ids_to_retry: []
 chat:
 - chat_id: dyjs01
-  ids_to_retry:
+  ids_to_retry: []
 - chat_id: python
   ids_to_retry: []
 - chat_id: github

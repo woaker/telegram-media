@@ -13,9 +13,9 @@ proxy:
 
 chat:
 - chat_id: dyjs01
-  last_read_message_id: 4094 # 从消息ID 100开始扫描, 会根据历史下载情况自动更新
-  start_offset_id: 223       # 只下载ID >= 100的消息
-  end_offset_id: 230         # 只下载ID <= 300的消息
+  last_read_message_id: 241 # 从消息ID 100开始扫描, 会根据历史下载情况自动更新4094
+  start_offset_id: 231       # 只下载ID >= 100的消息
+  end_offset_id: 240         # 只下载ID <= 300的消息
   download_filter: media_type == r'(video)'
 # - chat_id: python
 #   last_read_message_id: 1358893
