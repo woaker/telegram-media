@@ -4,18 +4,18 @@ session_name: user_session
 # 移除bot_token，使用用户账号
 
 # 代理配置 - 使用本地HTTP代理服务
-# proxy:
-#   scheme: http
-#   hostname: 127.0.0.1
-#   port: 7890
-#   username: ''
-#   password: ''
+proxy:
+  scheme: http
+  hostname: 127.0.0.1
+  port: 7890
+  username: ''
+  password: ''
 
 chat:
 - chat_id: dyjs01
-  last_read_message_id: 223  # 从消息ID 100开始扫描, 会根据历史下载情况自动更新
-  start_offset_id: 221       # 只下载ID >= 100的消息
-  end_offset_id: 222         # 只下载ID <= 300的消息
+  last_read_message_id: 4094 # 从消息ID 100开始扫描, 会根据历史下载情况自动更新
+  start_offset_id: 223       # 只下载ID >= 100的消息
+  end_offset_id: 230         # 只下载ID <= 300的消息
   download_filter: media_type == r'(video)'
 # - chat_id: python
 #   last_read_message_id: 1358893
